@@ -4,3 +4,5 @@ Server/bin/Debug/
 Server/obj/Debug/
 Shared/bin/Debug/
 Shared/obj/Debug/
+.vscode/
+.vs/
