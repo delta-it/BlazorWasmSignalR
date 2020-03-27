@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using BlazorSignalRApp.Server.Hubs;
 
 namespace BlazorSignalRApp.Server
 {
@@ -14,6 +15,7 @@ namespace BlazorSignalRApp.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSignalR();
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
@@ -40,6 +42,7 @@ namespace BlazorSignalRApp.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapFallbackToClientSideBlazor<Client.Program>("index.html");
             });
         }
